@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Add New Book</title>
+</head>
+
+<body>
+  <%- include('partials/header') -%> <!-- Reuse your header partial -->
+
+  <main class="add-book-page">
+    <h2 class="add-book-title">Add a New Book</h2>
+    <form action="/books" method="POST" class="add-book-form">
+      <div class="form-group">
+        <label for="isbn">ISBN:</label>
+        <input type="text" id="isbn" name="isbn" required>
+      </div>
+      <button type="submit" class="submit-button">Add Book</button>
+    </form>
+
+  </main>
+
+  <%- include('partials/footer') -%> <!-- Reuse your footer partial -->
+</body>
+
+</html>

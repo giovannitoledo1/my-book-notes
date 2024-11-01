@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Review Book</title>
+</head>
+
+<body>
+  <%- include('partials/header') -%> <!-- Reuse your header partial -->
+
+  <main class="review-page">
+    <img class="book-cover" src="<%= book.cover_url ? book.cover_url : `/assets/no-image.png` %>" alt="Cover of <%= book.title %>">
+    <h2>Review: <%= book.title %></h2>
+    <p><strong>Author:</strong> <%= book.author %></p>
+
+    <form action="/addReview" method="POST" class="review-form">
+      <input type="hidden" name="id" value="<%= book.id %>">
+
+      <label for="rating">Rating (1-5):</label>
+      <input type="number" id="rating" name="rating" min="1" max="5" value="<%= book.rating || '' %>" required>
+
+      <label for="review">Review:</label>
+      <textarea id="review" name="review" required><%= book.review || '' %></textarea>
+
+      <button type="submit" class="submit-button button-spacing">Submit Review</button>
+    </form>
+
+    <form action="/deleteBook" method="POST" onsubmit="return confirmDelete()">
+      <input type="hidden" name="id" value="<%= book.id %>">
+      <button type="submit" class="delete-button button-spacing">Delete Book</button>
+    </form>
+
+  </main>
+
+  <%- include('partials/footer') -%> <!-- Reuse your footer partial -->
+</body>
+<script>
+    function confirmDelete(){
+    return confirm("Are you sure you want to delete this book?");
+  }
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Book Notes</title>
+</head>
+
+<body>
+  <!-- Include header partial here -->
+  <%- include('partials/header') -%>
+
+  <main>
+    <h1 class="collection-title">My Book Collection</h1>
+    <div class="book-list">
+      <% books.forEach(book => { %>
+        <div class="book-item">
+          <img src="<%= book.cover_url ? book.cover_url : `/assets/no-image.png` %>" alt="Cover of <%= book.title %>">
+          <h2><%= book.title %></h2>
+          <p><strong>Author:</strong> <%= book.author %></p>
+          <p><strong>Rating:</strong> <%=book.rating %> / 5</p>
+          <p><strong>Review:</strong> <%= book.review %></p>
+          <p><strong>Date Read:</strong> <%= book.date_read %></p>
+          
+
+          <form action="/addReview" method="GET">
+            <input type="hidden" name="id" value="<%= book.id %>">
+            <button type="submit">Review</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+  <!-- Include footer partial here -->
+  <%- include('partials/footer') -%>
+
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
